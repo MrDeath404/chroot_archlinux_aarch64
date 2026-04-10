@@ -1,26 +1,21 @@
 import curses
 import time
 
-class ConsoleUI:
-    def __init__(self, stdscr):
-        self.buffer = stdscr
-    def add_label():
-        pass
-    def remove_label():
-        pass
+from ConsoleUI import ConsoleUI
+from ConsoleUI import Label
+from ConsoleUI import Button
 
-def main(stdscr):
-    stdscr.nodelay(True)
-    stdscr.addstr(0, 0, "Status: q")
-    stdscr.refresh()
-    time.sleep(2)
-    
-    # Move to y=0, x=9 (where 'q' is) and overwrite with 's'
-    stdscr.move(0, 8)
-    stdscr.addch('s')
-    stdscr.refresh()
-    
-    time.sleep(2)
+def main(screen):
+    ui = ConsoleUI(screen)
+    label = Label("ArchLinux Manager")
+    label = ui.add_label(label)
+
+    button = Button("Start")
+    button = ui.add_button(button)
+
+    while True:
+        ui.render()
+        time.sleep(2)
 
 if __name__ == "__main__":
     curses.wrapper(main)
